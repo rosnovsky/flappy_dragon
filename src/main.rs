@@ -63,6 +63,7 @@ impl State {
             self.score += 1;
             self.obstacle = Obstacle::new(self.player.x + SCREEN_WIDTH, self.score);
         }
+
         if self.player.y > SCREEN_HEIGHT || self.obstacle.collision(&self.player) {
             self.mode = GameMode::GameOver;
         }
@@ -108,17 +109,17 @@ impl Player {
         Player {
             x,
             y,
-            velocity: 0.0,
+            velocity: 2.1,
         }
     }
 
     fn render(&mut self, ctx: &mut BTerm) {
-        ctx.set(0, self.y, YELLOW, BLACK, to_cp437('@'));
+        ctx.set(0, self.y, YELLOW, BLACK, to_cp437('>'));
     }
 
     fn gravity_and_move(&mut self) {
         if self.velocity < 2.0 {
-            self.velocity += 0.2;
+            self.velocity += 0.4;
         }
         self.y += self.velocity as i32;
         if self.y < 0 {
